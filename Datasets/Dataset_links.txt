@@ -1,0 +1,4 @@
+Unified Coastal Waste - https://zenodo.org/records/20630252?preview_file=UCWD_v1.zip
+Seanoe - shore https://www.seanoe.org/data/00858/96963/
+Marine Debris and Oil Spill https://zenodo.org/records/10664073
+Seaclear - kaggle underwater https://www.kaggle.com/datasets/jocelyndumlao/seaclear-marine-debris-detection-and-segmentation

@@ -1,0 +1,59 @@
+{
+  "underwater": [
+    "tire_rubber",
+    "rope",
+    "bottle_glass",
+    "tube_cement",
+    "bottle_plastic",
+    "net_plastic",
+    "bag_plastic",
+    "can_metal",
+    "brick_clay",
+    "other_waste",
+    "other_plastic",
+    "cup_plastic",
+    "metal_debris",
+    "clothing_fiber",
+    "branch_wood",
+    "snack_wrapper"
+  ],
+  "shore": [
+    "fragment",
+    "others",
+    "styrene_foam",
+    "pet_bottle",
+    "buoy",
+    "other_bottle",
+    "plastic_bag",
+    "rope",
+    "fishing_net",
+    "other_container",
+    "box_shaped_case",
+    "other_fishing_gear",
+    "other_string"
+  ],
+  "drone": [
+    "Plastic bottle",
+    "Metal",
+    "Plastic fragment",
+    "Plastic container",
+    "Glass",
+    "Plastic bag",
+    "Packet"
+  ],
+  "satellite": [
+    "Marine Debris",
+    "Oil Spill",
+    "Oil Platform",
+    "Ship",
+    "Sargassum & Floating Algae",
+    "Foam, Waves & Wakes",
+    "Natural Organic Material"
+  ],
+  "viewpoint": [
+    "underwater",
+    "shore",
+    "drone",
+    "satellite"
+  ]
+}

@@ -1,0 +1,12 @@
+# PyTorch with CUDA: install first, matching your GPU and driver, e.g. for CUDA 12.8 (RTX 50-series):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128
+torch
+keras>=3.0          # runs on the PyTorch backend (KERAS_BACKEND=torch, set inside the notebooks)
+numpy
+pandas
+opencv-python
+pillow
+scikit-learn
+matplotlib
+gradio              # web app
+jupyter             # notebooks
