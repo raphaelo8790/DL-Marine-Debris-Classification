@@ -17,3 +17,6 @@ desktop.ini
 
 # Trained models (100+ MB): attached to the GitHub release instead
 Models/*.keras
+
+# Submission archives (contain names and IDs)
+*.zip
