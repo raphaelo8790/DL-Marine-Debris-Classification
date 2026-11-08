@@ -20,7 +20,7 @@ import os
 PROJECT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # the "Marine Debris Classification" folder
 RUNS     = os.path.join(PROJECT, "Models")                       # where the *_best.keras models are
 EVALS    = os.path.join(RUNS, "Evaluations")                    # eval_<model>/thresholds.json
-PREPARED = os.path.join(PROJECT, "Datasets", "prepared")        # for classes.json
+PREPARED = os.path.join(PROJECT, "Datasets", "prepared")        # optional classes.json
 USE_GPU  = False   # False = run on the CPU (fine for single photos, and safe while training runs)
 GPU      = "1"     # which GPU to use if USE_GPU is True
 
@@ -37,7 +37,69 @@ INPUT = 320
 HEADS = ["underwater", "shore", "drone", "satellite"]
 VIEWS = ["underwater", "shore", "drone", "satellite"]          # viewpoint head output order
 TRASH_CLASSES = {"satellite": ["Marine Debris", "Oil Spill"]}   # other heads: every class is trash
-CLASSES = json.load(open(os.path.join(PREPARED, "classes.json"), encoding="utf-8"))
+# Class names in each head's output order (the same list 1_prepare_data.py writes to classes.json).
+# Built in so the app runs without the datasets; a classes.json in Datasets/prepared, if present, is used instead.
+DEFAULT_CLASSES = {
+    "underwater": [
+        "tire_rubber",
+        "rope",
+        "bottle_glass",
+        "tube_cement",
+        "bottle_plastic",
+        "net_plastic",
+        "bag_plastic",
+        "can_metal",
+        "brick_clay",
+        "other_waste",
+        "other_plastic",
+        "cup_plastic",
+        "metal_debris",
+        "clothing_fiber",
+        "branch_wood",
+        "snack_wrapper"
+    ],
+    "shore": [
+        "fragment",
+        "others",
+        "styrene_foam",
+        "pet_bottle",
+        "buoy",
+        "other_bottle",
+        "plastic_bag",
+        "rope",
+        "fishing_net",
+        "other_container",
+        "box_shaped_case",
+        "other_fishing_gear",
+        "other_string"
+    ],
+    "drone": [
+        "Plastic bottle",
+        "Metal",
+        "Plastic fragment",
+        "Plastic container",
+        "Glass",
+        "Plastic bag",
+        "Packet"
+    ],
+    "satellite": [
+        "Marine Debris",
+        "Oil Spill",
+        "Oil Platform",
+        "Ship",
+        "Sargassum & Floating Algae",
+        "Foam, Waves & Wakes",
+        "Natural Organic Material"
+    ],
+    "viewpoint": [
+        "underwater",
+        "shore",
+        "drone",
+        "satellite"
+    ]
+}
+_cls_file = os.path.join(PREPARED, "classes.json")
+CLASSES = json.load(open(_cls_file, encoding="utf-8")) if os.path.exists(_cls_file) else DEFAULT_CLASSES
 _models = {}
 
 
