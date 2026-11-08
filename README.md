@@ -81,6 +81,6 @@ Final models: `cnn_adamw_v3_long_best.keras` (baseline CNN) and `mnv2_adamw_v2_b
 4. **Re-evaluate:** set `MODEL_NAME` in `5_evaluate.ipynb` and run all cells (needs the prepared tiles).
 5. **Rebuild everything from scratch:** download the four datasets into `Datasets/`, run `python "Notebook training codes/1_prepare_data.py"`, then run notebooks 2 to 5.
 
-The notebooks and `1_prepare_data.py` have the project folder path at the top. Change it if your copy is somewhere else. The web app finds its files on its own.
+Every script finds the project folder on its own (notebooks from the folder they run in, `1_prepare_data.py` and the web app from where the file sits), so the repository works wherever it is cloned. Open the notebooks from `Notebook training codes`.
 
 > **Note: this is a proof of concept.** It is built on public datasets and measured on their test photos, not a production system. Its main finding is that **depth beats breadth**: understanding the problem and fixing the data mattered more than adding parameters or training time. The small CNN trained from scratch (1.42M parameters) matched or beat MobileNetV2 pretrained on ImageNet (6.18M parameters, over 4× larger) on three of the four viewpoints, and clearly won on satellite. Training the CNN 22 more epochs moved the scores by about one point, while correcting the tile labels moved underwater trash detection by 17–20 points. A bigger or longer-trained model is not automatically a better one: a smaller model built for the task can match it or win.

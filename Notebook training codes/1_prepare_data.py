@@ -26,7 +26,7 @@ from PIL import Image, ImageOps
 # ============================================================================
 # SETTINGS
 # ============================================================================
-ROOT = r"C:\Users\Raphaelo\Documents\Datasets"
+ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Datasets")   # <project>/Datasets
 DIRS = {
     "seaclear": "Seaclear Marine Debris Dataset (underwater)",
     "bepli":    os.path.join("BePLi_dataset_v2 (shore)", "plastic_coco"),
