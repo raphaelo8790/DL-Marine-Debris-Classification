@@ -54,7 +54,7 @@ Macro scores per head, in %. Thresholds are tuned on validation and applied once
 
 Viewpoint accuracy: CNN 99.5%, MobileNetV2 99.6%. Confusion matrices and ROC curves are in `Models/Evaluations/`.
 
-**Verdict:** MobileNetV2 wins underwater, the CNN wins satellite, and shore and drone are a tie. The biggest gain in the project came from fixing the tile labels (underwater trash ranking +17–20 points), not from the architecture: the remaining limits come from the data.
+**Verdict:** MobileNetV2 wins underwater, the CNN wins satellite, and shore and drone are a tie. The biggest gain in the project came from fixing the tile labels (underwater trash ranking +17–20 points), not just from the architecture: the remaining limits come from the data.
 
 ## Repository layout
 
