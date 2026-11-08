@@ -1,0 +1,53 @@
+{
+  "underwater": {
+    "tire_rubber": 0.35,
+    "rope": 0.06,
+    "bottle_glass": 0.21,
+    "tube_cement": 0.24,
+    "bottle_plastic": 0.27,
+    "net_plastic": 0.3,
+    "bag_plastic": 0.28,
+    "can_metal": 0.22,
+    "brick_clay": 0.19,
+    "other_waste": 0.09,
+    "other_plastic": 0.08,
+    "cup_plastic": 0.11,
+    "metal_debris": 0.15,
+    "clothing_fiber": 0.08,
+    "branch_wood": 0.05,
+    "snack_wrapper": 0.28
+  },
+  "shore": {
+    "fragment": 0.43,
+    "others": 0.36,
+    "styrene_foam": 0.29,
+    "pet_bottle": 0.29,
+    "buoy": 0.22,
+    "other_bottle": 0.24,
+    "plastic_bag": 0.21,
+    "rope": 0.19,
+    "fishing_net": 0.21,
+    "other_container": 0.27,
+    "box_shaped_case": 0.18,
+    "other_fishing_gear": 0.24,
+    "other_string": 0.18
+  },
+  "drone": {
+    "Plastic bottle": 0.53,
+    "Metal": 0.5,
+    "Plastic fragment": 0.33,
+    "Plastic container": 0.29,
+    "Glass": 0.34,
+    "Plastic bag": 0.34,
+    "Packet": 0.5
+  },
+  "satellite": {
+    "Marine Debris": 0.47,
+    "Oil Spill": 0.47,
+    "Oil Platform": 0.18,
+    "Ship": 0.15,
+    "Sargassum & Floating Algae": 0.23,
+    "Foam, Waves & Wakes": 0.2,
+    "Natural Organic Material": 0.33
+  }
+}

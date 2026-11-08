@@ -1,0 +1,19 @@
+# Raw datasets and generated tiles (tens of GB): download with Datasets/Dataset_links.txt
+Datasets/*/
+!Datasets/prepared/
+Datasets/prepared/images/
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Trained models (100+ MB): attached to the GitHub release instead
+Models/*.keras

@@ -1,0 +1,82 @@
+G10 data preparation report  (2026-11-07 04:08, 0.2 min)
+limit per dataset per split: none (full run)
+
+SeaClear video-block split: 18 sequences, 181 blocks, worst class coverage ratio in val/test = 0.56, gap frames dropped = 156
+v3 labelling rule for ['seaclear']: object counts if >= 30% of its outline is inside OR it covers >= 2% of the tile; ambiguous tiles dropped: 3219
+
+=== seaclear (underwater head) ===
+split    images    clean  clean %
+train     33459    20392    60.9%
+val        7129     4278    60.0%
+test       6917     4298    62.1%
+
+class                          train     val    test
+tire_rubber                     3351     697     590
+rope                            2069     597     238
+bottle_glass                    1455     178     458
+tube_cement                     1505     718     370
+bottle_plastic                   981     168     257
+net_plastic                     2271     220     395
+bag_plastic                      705      98      99
+can_metal                        805     109     100
+brick_clay                       440     103      52
+other_waste                      292      55     177
+other_plastic                    286      49      69
+cup_plastic                      220      59      63
+metal_debris                     401     101      82
+clothing_fiber                   351      43      40
+branch_wood                      213     104     102
+snack_wrapper                    230      20      40
+
+=== bepli (shore head) ===
+split    images    clean  clean %
+train     20106     6843    34.0%
+val        6696     2181    32.6%
+test       6696     2439    36.4%
+
+class                          train     val    test
+fragment                        9874    3444    2932
+others                          6069    2084    2080
+styrene_foam                    2856     921    1145
+pet_bottle                      1685     598     592
+buoy                            1050     366     493
+other_bottle                    1087     412     385
+plastic_bag                     1193     442     210
+rope                            1189     435     350
+fishing_net                      937     289     283
+other_container                  630     233     298
+box_shaped_case                  566     190     249
+other_fishing_gear               475     179     162
+other_string                     512     165     116
+
+=== ucwd (drone head) ===
+split    images    clean  clean %
+train     57942    46975    81.1%
+val       10528     8603    81.7%
+test      10782     8633    80.1%
+
+class                          train     val    test
+Plastic bottle                  5340     836    1211
+Metal                           1933     386     265
+Plastic fragment                1822     336     231
+Plastic container                983     157     175
+Glass                           1256     254     121
+Plastic bag                      527      94     102
+Packet                           639     122     333
+
+=== mados (satellite head) ===
+split    images    clean  clean %
+train     11464     4032    35.2%
+val         642      236    36.8%
+test        728      249    34.2%
+
+class                          train     val    test
+Marine Debris                   2000      98     124
+Oil Spill                       1632      77      80
+Oil Platform                    1192      92     107
+Ship                            1096      75      86
+Sargassum & Floating Algae       808      33      45
+Foam, Waves & Wakes             1032      72      81
+Natural Organic Material         664      38      34
+
+Warnings: 0
