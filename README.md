@@ -1,14 +1,5 @@
 # Marine Debris Classification
 
-Deep Learning project, group G10.
-
-| Name | ID |
-|---|---|
-| Adham Yakout | 231000914 |
-| Adham Elbehiry | 231000593 |
-| Asma Raafat | 241011502 |
-| Hamza | 231006758 |
-
 One network that looks at the sea from four viewpoints (underwater, shore, drone and satellite), recognises which viewpoint a photo comes from, and says whether it contains debris and which kinds. We compare a **baseline CNN trained from scratch** with **MobileNetV2 transfer learning** (ImageNet weights), using the same heads, data and training setup, so only the backbone differs.
 
 The full story (design, data problems, every training run, results and lessons) is in [`Project_Journey_Report.pdf`](Project_Journey_Report.pdf). The slides are in [`Marine Debris Classification.pptx`](Marine%20Debris%20Classification.pptx).
