@@ -4,7 +4,7 @@ One network that looks at the sea from four viewpoints (underwater, shore, drone
 
 The full story (design, data problems, every training run, results and lessons) is in [`Project_Journey_Report.pdf`](Project_Journey_Report.pdf). The slides are in [`Marine Debris Classification.pptx`](Marine%20Debris%20Classification.pptx).
 
-To see how the network works, download [`Network_Map.html`](Network_Map.html) and open it in a browser: a zoomable drawing of the whole model, drawn to scale, that follows one tile through training, validation, testing and the web app, with the real code under every part.
+To see how the network works, open the **[Network Map](https://raphaelo8790.github.io/DL-Marine-Debris-Classification/Network_Map.html)**: a zoomable drawing of the whole model, drawn to scale, that follows one tile through training, validation, testing and the web app, with the real code under every part.
 
 ## Model
 
@@ -71,7 +71,7 @@ Notebook training codes/
   4_continue_cnn.ipynb        continues the CNN from its best checkpoint
   5_evaluate.ipynb            all metrics, confusion matrices, ROC curves
 webapp/app.py                 upload a photo and see what the model finds
-Network_Map.html              interactive, zoomable map of the network (open in a browser)
+Network_Map.html              interactive, zoomable map of the network (live link above)
 ```
 
 Final models: `cnn_adamw_v3_long_best.keras` (baseline CNN) and `mnv2_adamw_v2_best.keras` (MobileNetV2). `cnn_adamw_v3_best.keras` is the CNN at 60 epochs, which `4_continue_cnn` starts from.
