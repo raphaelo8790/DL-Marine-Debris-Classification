@@ -69,11 +69,23 @@ canvas#cv:active{cursor:grabbing}
 .pick canvas{width:38px;height:38px;border-radius:7px;display:block}
 .hint{position:absolute;bottom:14px;left:max(12px,env(safe-area-inset-left,0px));font-size:12px;color:var(--muted);pointer-events:none;max-width:52%}
 
-.insp{flex:0 0 46%;min-height:0;overflow-y:auto;background:var(--paper);border-top:1px solid var(--line);padding-block:12px 20px;
+.insp{flex:0 0 var(--ph,46%);min-height:0;min-width:0;overflow-y:auto;background:var(--paper);padding-block:10px 20px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 @media (min-width:900px){
   main{flex-direction:row}
-  .insp{flex:0 0 400px;border-top:0;border-left:1px solid var(--line);padding-left:20px}
+  .insp{flex:0 0 var(--pw,400px);padding-left:14px}
+}
+/* The grip between the drawing and the explanation: drag it to give either side more room. The explanation
+   never closes fully: tapping a part should always show what it is. */
+.grip{flex:none;height:26px;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--paper);border-top:1px solid var(--line);
+  touch-action:none;cursor:row-resize;user-select:none;-webkit-user-select:none}
+.grip::before{content:"";width:44px;height:4px;border-radius:3px;background:var(--line)}
+.grip:hover::before,.grip.drag::before{background:var(--uw)}
+.grip:focus-visible{outline:3px solid var(--uw);outline-offset:-3px}
+main.drag .insp{pointer-events:none}
+@media (min-width:900px){
+  .grip{width:16px;height:auto;flex-direction:column;cursor:col-resize;border-top:0;border-left:1px solid var(--line)}
+  .grip::before{width:4px;height:44px}
 }
 .crumb{font:600 11.5px var(--body);color:var(--muted);letter-spacing:.02em;margin-bottom:4px}
 .crumb button{border:0;background:none;padding:0;color:inherit;font:inherit;text-decoration:underline;text-underline-offset:2px}
@@ -159,6 +171,7 @@ table.mk td.one{color:var(--fg);font-weight:700}table.mk td.zero{color:var(--mut
     <div class="hint" id="hint">Pinch or scroll to zoom. Tap a part to dive in.</div>
     <div class="zoom"><button id="zOut" aria-label="Zoom out">−</button><button id="zIn" aria-label="Zoom in">+</button><button id="zFit" class="fit">Fit all</button></div>
   </div>
+  <div class="grip" id="grip" role="separator" tabindex="0" aria-label="Resize the explanation panel. Drag, or use the arrow keys."></div>
   <aside class="insp" id="insp" aria-live="polite"></aside>
 </main>
 <script>
@@ -900,7 +913,32 @@ $('demoBtn').onclick=()=>{if(demo){endDemo();go(root);}else startDemo();};
 
 /* ---------- start ---------- */
 readColors();build();resize();pinned=root;focus=root;fly(target(root),0);
-new ResizeObserver(()=>{const was=pinned;resize();if(was)fly(target(was),0);}).observe(stage);
+// Setting a canvas's size wipes it. Redraw in the same step (before the browser paints), or the drawing
+// flashes blank on every pixel the panel grip moves.
+new ResizeObserver(()=>{const was=pinned,r=stage.getBoundingClientRect();if(Math.abs(r.width-W)<.5&&Math.abs(r.height-H)<.5)return;
+  resize();if(was)fly(target(was),0);if(!pinned)setFocus(pickAt(cam.x,cam.y));draw();}).observe(stage);
+/* ---------- the grip: drag to give the explanation panel more or less room (it never closes fully) ---------- */
+(function(){const main=document.querySelector('main'),grip=$('grip'),wide=matchMedia('(min-width:900px)');
+  let size={w:null,h:null},drag=null;
+  try{const v=JSON.parse(localStorage.getItem('nm-panel')||'null');if(v)size={w:v.w||null,h:v.h||null};}catch(e){}
+  const save=()=>{try{localStorage.setItem('nm-panel',JSON.stringify(size));}catch(e){}};
+  const room=()=>{const r=main.getBoundingClientRect();return wide.matches?r.width:r.height;};
+  const cur=()=>{const r=insp.getBoundingClientRect();return wide.matches?r.width:r.height;};
+  const done=()=>{save();shown=null;dirty=true;};
+  function apply(){const k=wide.matches?'w':'h',min=wide.matches?260:150,max=Math.max(min,room()-(wide.matches?240:130));
+    if(size[k]!=null)size[k]=Math.max(min,Math.min(max,size[k]));
+    main.style.setProperty('--pw',size.w!=null?size.w+'px':'400px');main.style.setProperty('--ph',size.h!=null?size.h+'px':'46%');}
+  function set(v){size[wide.matches?'w':'h']=v;apply();}
+  grip.addEventListener('pointerdown',e=>{grip.setPointerCapture(e.pointerId);const r=main.getBoundingClientRect();
+    drag={off:(wide.matches?r.right-e.clientX:r.bottom-e.clientY)-cur()};grip.classList.add('drag');main.classList.add('drag');e.preventDefault();});
+  grip.addEventListener('pointermove',e=>{if(!drag)return;const r=main.getBoundingClientRect();set((wide.matches?r.right-e.clientX:r.bottom-e.clientY)-drag.off);});
+  const end=()=>{if(!drag)return;drag=null;grip.classList.remove('drag');main.classList.remove('drag');done();};
+  grip.addEventListener('pointerup',end);grip.addEventListener('pointercancel',end);
+  grip.addEventListener('dblclick',()=>{const k=wide.matches?'w':'h';size[k]=cur()>room()*.5?null:Math.round(room()*.6);apply();done();});
+  grip.addEventListener('keydown',e=>{const grow=wide.matches?'ArrowLeft':'ArrowUp',shrink=wide.matches?'ArrowRight':'ArrowDown';
+    if(e.key===grow||e.key===shrink){set(cur()+(e.key===grow?40:-40));done();e.preventDefault();}});
+  grip.title='Drag to resize the explanations';
+  wide.addEventListener('change',apply);window.addEventListener('resize',apply);apply();})();
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();shown=null;});
 new MutationObserver(()=>{readColors();shown=null;}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{dirty=true;});
